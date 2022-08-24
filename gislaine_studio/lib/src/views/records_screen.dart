@@ -14,7 +14,7 @@ class _RecordsScreenState extends State<RecordsScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
   }
 
   @override
@@ -22,20 +22,24 @@ class _RecordsScreenState extends State<RecordsScreen>
     return Column(
       children: [
         Container(
-          color: Theme.of(context).cardColor,
+          color: const Color(0xFFf0cac0),
           child: TabBar(
             controller: _tabController,
-            indicatorColor: Colors.black,
-            labelColor: Colors.black,
-            unselectedLabelColor: Colors.black45,
+            indicatorColor: const Color(0xFFeaa4a4),
+            labelColor: const Color(0xFF4E0D3A),
+            unselectedLabelColor: Colors.black54,
             tabs: const <Widget>[
               Tab(
-                icon: Icon(Icons.sports_kabaddi),
+                icon: Icon(Icons.sports_gymnastics),
                 text: 'Alunos',
               ),
               Tab(
-                icon: Icon(Icons.sports_gymnastics),
-                text: 'Professores',
+                text: 'Produtos',
+                icon: Icon(Icons.checkroom),
+              ),
+              Tab(
+                icon: Icon(Icons.school),
+                text: 'Modalidades',
               ),
             ],
           ),
@@ -45,10 +49,20 @@ class _RecordsScreenState extends State<RecordsScreen>
             controller: _tabController,
             children: const <Widget>[
               Center(
-                child: Text("Alunos"),
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Card(
+                      child: Padding(
+                    padding: EdgeInsets.all(56.0),
+                    child: Text("Alunos"),
+                  )),
+                ),
               ),
               Center(
-                child: Text("Professores"),
+                child: Text("Produtos"),
+              ),
+              Center(
+                child: Text("Modalidades"),
               ),
             ],
           ),

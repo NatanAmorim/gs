@@ -14,7 +14,7 @@ class _InventoryScreenState extends State<InventoryScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
   }
 
   @override
@@ -22,17 +22,13 @@ class _InventoryScreenState extends State<InventoryScreen>
     return Column(
       children: [
         Container(
-          color: Theme.of(context).cardColor,
+          color: const Color(0xFFf0cac0),
           child: TabBar(
             controller: _tabController,
-            indicatorColor: Colors.black,
-            labelColor: Colors.black,
+            indicatorColor: const Color(0xFFeaa4a4),
+            labelColor: const Color(0xFF4E0D3A),
             unselectedLabelColor: Colors.black45,
             tabs: const <Widget>[
-              Tab(
-                text: 'Produtos',
-                icon: Icon(Icons.checkroom),
-              ),
               Tab(
                 text: 'Encomendas',
                 icon: Icon(Icons.local_shipping),
@@ -48,9 +44,6 @@ class _InventoryScreenState extends State<InventoryScreen>
           child: TabBarView(
             controller: _tabController,
             children: const <Widget>[
-              Center(
-                child: Text("Produtos"),
-              ),
               Center(
                 child: Text("Encomendas"),
               ),

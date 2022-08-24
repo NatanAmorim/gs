@@ -22,12 +22,12 @@ class _TransactionsScreenState extends State<TransactionsScreen>
     return Column(
       children: [
         Container(
-          color: Theme.of(context).cardColor,
+          color: const Color(0xFFf0cac0),
           child: TabBar(
             controller: _tabController,
-            indicatorColor: Colors.black,
-            labelColor: Colors.black,
-            unselectedLabelColor: Colors.black45,
+            indicatorColor: const Color(0xFFeaa4a4),
+            labelColor: const Color(0xFF4E0D3A),
+            unselectedLabelColor: Colors.black54,
             tabs: const <Widget>[
               Tab(
                 text: 'Vendas',
