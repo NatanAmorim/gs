@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:gislaine_studio/src/views/form_modality.dart';
+import 'package:gislaine_studio/src/views/form_order.dart';
+import 'package:gislaine_studio/src/views/form_person.dart';
+import 'package:gislaine_studio/src/views/form_product.dart';
 import 'package:gislaine_studio/src/views/inventory_screen.dart';
 import 'package:gislaine_studio/src/views/point_of_sale_screen.dart';
 import 'package:gislaine_studio/src/views/records_screen.dart';
@@ -23,7 +27,6 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       theme: ThemeData(
         useMaterial3: true,
-
         scrollbarTheme: ScrollbarThemeData(
           thumbVisibility: MaterialStateProperty.all(true),
           thumbColor: MaterialStateProperty.all(Colors.blueAccent),
@@ -95,22 +98,66 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   position: RelativeRect.fill,
                   items: [
                     PopupMenuItem<String>(
-                      onTap: () {},
+                      onTap: () async {
+                        // The following line is only added because
+                        // the navigator does not push without it
+                        await Future.delayed(const Duration(milliseconds: 1));
+                        // ignore: use_build_context_synchronously
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const FormPerson(),
+                          ),
+                        );
+                      },
                       value: 'Novo aluno',
                       child: const Text('Novo aluno'),
                     ),
                     PopupMenuItem<String>(
-                      onTap: () {},
+                      onTap: () async {
+                        // The following line is only added because
+                        // the navigator does not push without it
+                        await Future.delayed(const Duration(milliseconds: 1));
+                        // ignore: use_build_context_synchronously
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const FormProduct(),
+                          ),
+                        );
+                      },
                       value: 'Novo produto',
                       child: const Text('Novo produto'),
                     ),
                     PopupMenuItem<String>(
-                      onTap: () {},
+                      onTap: () async {
+                        // The following line is only added because
+                        // the navigator does not push without it
+                        await Future.delayed(const Duration(milliseconds: 1));
+                        // ignore: use_build_context_synchronously
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const FormOrder(),
+                          ),
+                        );
+                      },
                       value: 'Nova encomenda',
                       child: const Text('Nova encomenda'),
                     ),
                     PopupMenuItem<String>(
-                      onTap: () {},
+                      onTap: () async {
+                        // The following line is only added because
+                        // the navigator does not push without it
+                        await Future.delayed(const Duration(milliseconds: 1));
+                        // ignore: use_build_context_synchronously
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const FormModality(),
+                          ),
+                        );
+                      },
                       value: 'Nova modalidade',
                       child: const Text('Nova modalidade'),
                     ),
