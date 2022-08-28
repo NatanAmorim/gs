@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gislaine_studio/src/templates/widgets/tabbar_template.dart';
 
 class TransactionsScreen extends StatefulWidget {
   const TransactionsScreen({Key? key}) : super(key: key);
@@ -21,24 +22,18 @@ class _TransactionsScreenState extends State<TransactionsScreen>
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          color: const Color(0xFFf0cac0),
-          child: TabBar(
-            controller: _tabController,
-            indicatorColor: const Color(0xFFeaa4a4),
-            labelColor: const Color(0xFF4E0D3A),
-            unselectedLabelColor: Colors.black54,
-            tabs: const <Widget>[
-              Tab(
-                text: 'Vendas',
-                icon: Icon(Icons.point_of_sale),
-              ),
-              Tab(
-                text: 'Mensalidades',
-                icon: Icon(Icons.receipt_long),
-              ),
-            ],
-          ),
+        TabBarTemplate(
+          controller: _tabController,
+          tabs: const <Tab>[
+            Tab(
+              text: 'Vendas',
+              icon: Icon(Icons.point_of_sale),
+            ),
+            Tab(
+              text: 'Mensalidades',
+              icon: Icon(Icons.receipt_long),
+            ),
+          ],
         ),
         Expanded(
           child: TabBarView(

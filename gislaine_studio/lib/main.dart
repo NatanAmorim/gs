@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:gislaine_studio/src/templates/app_theme.dart';
 import 'package:gislaine_studio/src/views/form_modality.dart';
 import 'package:gislaine_studio/src/views/form_order.dart';
 import 'package:gislaine_studio/src/views/form_person.dart';
@@ -14,8 +15,6 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'Flutter Code Sample';
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,29 +23,9 @@ class MyApp extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
-      themeMode: ThemeMode.light,
-      theme: ThemeData(
-        useMaterial3: true,
-        scrollbarTheme: ScrollbarThemeData(
-          thumbVisibility: MaterialStateProperty.all(true),
-          thumbColor: MaterialStateProperty.all(Colors.blueAccent),
-          thickness: MaterialStateProperty.all(10),
-          radius: Radius.zero,
-        ),
-        cardTheme: const CardTheme(
-          color: Color(0xFFffdbcf),
-        ),
-        scaffoldBackgroundColor: const Color(0xFFFEEAE6),
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.pink,
-          primary: const Color(0xFFFEDBD0),
-          secondary: const Color(0xFFFEEAE6),
-        ),
-        // textTheme: GoogleFonts.archivoTextTheme(
-        //   ThemeData.light().textTheme,
-        // ),
-      ),
-      title: _title,
+      themeMode: ThemeMode.dark,
+      theme: appTheme,
+      title: 'Gislaine Studio',
       home: const MyStatefulWidget(),
     );
   }
@@ -66,7 +45,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton.large(
-        backgroundColor: Colors.amberAccent,
         tooltip: 'Ponto de Venda',
         onPressed: () => Navigator.push(
           context,
@@ -79,20 +57,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       body: Row(
         children: <Widget>[
           NavigationRail(
-            backgroundColor: Theme.of(context).cardColor,
+            indicatorColor:
+                Theme.of(context).colorScheme.primary.withOpacity(0.3),
             selectedIndex: _selectedIndex,
-            selectedIconTheme: const IconThemeData(color: Color(0xFFeaa4a4)),
-            unselectedIconTheme: const IconThemeData(color: Colors.black87),
-            selectedLabelTextStyle: const TextStyle(color: Color(0xFF442C2E)),
-            unselectedLabelTextStyle: const TextStyle(color: Colors.black87),
             leading: Padding(
               padding: const EdgeInsets.only(bottom: 25.0),
               child: FloatingActionButton(
                 heroTag: 'add',
-                backgroundColor: const Color(0xFF720e5d),
-                foregroundColor: Colors.white,
+                backgroundColor: Theme.of(context).colorScheme.tertiary,
+                foregroundColor: Theme.of(context).colorScheme.onTertiary,
                 onPressed: () => showMenu(
-                  color: Colors.grey[200],
                   elevation: 8,
                   context: context,
                   position: RelativeRect.fill,
@@ -180,7 +154,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       context: context,
                       applicationIcon: const FlutterLogo(),
                       applicationName: 'Gislaine Studio App',
-                      applicationVersion: '0.1.0',
+                      applicationVersion: 'Alpha version.',
                       applicationLegalese:
                           '\u{a9} 2022 Natan Amorim S. G. de Moraes',
                       children: <Widget>[
@@ -191,8 +165,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               TextSpan(
                                 style: Theme.of(context).textTheme.bodyText2!,
                                 text:
-                                    'App de gestão de Gislaine Studio em Andradina.\n'
-                                    'Desenvolvido com Flutter, mais informações em\n',
+                                    '\tApp de gestão de Gislaine Studio em Andradina.\n'
+                                    '\nDesenvolvido com Flutter, mais informações em\n',
                               ),
                               TextSpan(
                                 style: Theme.of(context)
@@ -234,7 +208,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               ),
             ],
           ),
-          const VerticalDivider(thickness: 1, width: 1),
+          const VerticalDivider(
+            thickness: 1,
+            width: 1,
+          ),
           // This is the main content.
           Expanded(
             child: IndexedStack(

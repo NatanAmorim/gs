@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gislaine_studio/src/templates/widgets/tabbar_template.dart';
 
 class RecordsScreen extends StatefulWidget {
   const RecordsScreen({Key? key}) : super(key: key);
@@ -21,28 +22,22 @@ class _RecordsScreenState extends State<RecordsScreen>
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          color: const Color(0xFFf0cac0),
-          child: TabBar(
-            controller: _tabController,
-            indicatorColor: const Color(0xFFeaa4a4),
-            labelColor: const Color(0xFF4E0D3A),
-            unselectedLabelColor: Colors.black54,
-            tabs: const <Widget>[
-              Tab(
-                icon: Icon(Icons.sports_gymnastics),
-                text: 'Alunos',
-              ),
-              Tab(
-                text: 'Produtos',
-                icon: Icon(Icons.checkroom),
-              ),
-              Tab(
-                icon: Icon(Icons.school),
-                text: 'Modalidades',
-              ),
-            ],
-          ),
+        TabBarTemplate(
+          controller: _tabController,
+          tabs: const <Tab>[
+            Tab(
+              icon: Icon(Icons.sports_gymnastics),
+              text: 'Alunos',
+            ),
+            Tab(
+              text: 'Produtos',
+              icon: Icon(Icons.checkroom),
+            ),
+            Tab(
+              icon: Icon(Icons.school),
+              text: 'Modalidades',
+            ),
+          ],
         ),
         Expanded(
           child: TabBarView(
