@@ -57,88 +57,86 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       body: Row(
         children: <Widget>[
           NavigationRail(
+            selectedIndex: _selectedIndex,
+            useIndicator: true,
             indicatorColor:
                 Theme.of(context).colorScheme.primary.withOpacity(0.3),
-            selectedIndex: _selectedIndex,
-            leading: Padding(
-              padding: const EdgeInsets.only(bottom: 25.0),
-              child: FloatingActionButton(
-                heroTag: 'add',
-                backgroundColor: Theme.of(context).colorScheme.tertiary,
-                foregroundColor: Theme.of(context).colorScheme.onTertiary,
-                onPressed: () => showMenu(
-                  elevation: 8,
-                  context: context,
-                  position: RelativeRect.fill,
-                  items: [
-                    PopupMenuItem<String>(
-                      onTap: () async {
-                        // The following line is only added because
-                        // the navigator does not push without it
-                        await Future.delayed(const Duration(milliseconds: 1));
-                        // ignore: use_build_context_synchronously
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const FormPerson(),
-                          ),
-                        );
-                      },
-                      value: 'Novo aluno',
-                      child: const Text('Novo aluno'),
-                    ),
-                    PopupMenuItem<String>(
-                      onTap: () async {
-                        // The following line is only added because
-                        // the navigator does not push without it
-                        await Future.delayed(const Duration(milliseconds: 1));
-                        // ignore: use_build_context_synchronously
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const FormProduct(),
-                          ),
-                        );
-                      },
-                      value: 'Novo produto',
-                      child: const Text('Novo produto'),
-                    ),
-                    PopupMenuItem<String>(
-                      onTap: () async {
-                        // The following line is only added because
-                        // the navigator does not push without it
-                        await Future.delayed(const Duration(milliseconds: 1));
-                        // ignore: use_build_context_synchronously
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const FormOrder(),
-                          ),
-                        );
-                      },
-                      value: 'Nova encomenda',
-                      child: const Text('Nova encomenda'),
-                    ),
-                    PopupMenuItem<String>(
-                      onTap: () async {
-                        // The following line is only added because
-                        // the navigator does not push without it
-                        await Future.delayed(const Duration(milliseconds: 1));
-                        // ignore: use_build_context_synchronously
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const FormModality(),
-                          ),
-                        );
-                      },
-                      value: 'Nova modalidade',
-                      child: const Text('Nova modalidade'),
-                    ),
-                  ],
-                ),
-                child: const Icon(Icons.add),
+            leading: FloatingActionButton(
+              heroTag: 'add',
+              backgroundColor: Theme.of(context).colorScheme.tertiary,
+              foregroundColor: Theme.of(context).colorScheme.onTertiary,
+              onPressed: () => showMenu(
+                context: context,
+                position: RelativeRect.fill,
+                elevation: 8,
+                items: [
+                  PopupMenuItem<String>(
+                    onTap: () async {
+                      // The following line is only added because
+                      // the navigator does not push without it
+                      await Future.delayed(const Duration(milliseconds: 1));
+                      // ignore: use_build_context_synchronously
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const FormPerson(),
+                        ),
+                      );
+                    },
+                    value: 'Novo aluno',
+                    child: const Text('Novo aluno'),
+                  ),
+                  PopupMenuItem<String>(
+                    onTap: () async {
+                      // The following line is only added because
+                      // the navigator does not push without it
+                      await Future.delayed(const Duration(milliseconds: 1));
+                      // ignore: use_build_context_synchronously
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const FormProduct(),
+                        ),
+                      );
+                    },
+                    value: 'Novo produto',
+                    child: const Text('Novo produto'),
+                  ),
+                  PopupMenuItem<String>(
+                    onTap: () async {
+                      // The following line is only added because
+                      // the navigator does not push without it
+                      await Future.delayed(const Duration(milliseconds: 1));
+                      // ignore: use_build_context_synchronously
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const FormOrder(),
+                        ),
+                      );
+                    },
+                    value: 'Nova encomenda',
+                    child: const Text('Nova encomenda'),
+                  ),
+                  PopupMenuItem<String>(
+                    onTap: () async {
+                      // The following line is only added because
+                      // the navigator does not push without it
+                      await Future.delayed(const Duration(milliseconds: 1));
+                      // ignore: use_build_context_synchronously
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const FormModality(),
+                        ),
+                      );
+                    },
+                    value: 'Nova modalidade',
+                    child: const Text('Nova modalidade'),
+                  ),
+                ],
               ),
+              child: const Icon(Icons.add),
             ),
             trailing: Expanded(
               child: Padding(
@@ -192,16 +190,19 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             labelType: NavigationRailLabelType.all,
             destinations: const <NavigationRailDestination>[
               NavigationRailDestination(
+                padding: EdgeInsets.only(top: 12),
                 icon: Icon(Icons.store_outlined),
                 selectedIcon: Icon(Icons.store),
                 label: Text('Cadastros'),
               ),
               NavigationRailDestination(
+                padding: EdgeInsets.only(top: 12),
                 icon: Icon(Icons.inventory_2_outlined),
                 selectedIcon: Icon(Icons.inventory_2),
                 label: Text('Inventário'),
               ),
               NavigationRailDestination(
+                padding: EdgeInsets.only(top: 12),
                 icon: Icon(Icons.payments_outlined),
                 selectedIcon: Icon(Icons.payments),
                 label: Text('Transações'),

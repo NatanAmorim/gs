@@ -73,9 +73,6 @@ class _FormModalityState extends State<FormModality> {
                                             padding: EdgeInsets.all(4.0),
                                             child: Text(
                                               'Salvar',
-                                              style: TextStyle(
-                                                fontSize: 24,
-                                              ),
                                             ),
                                           ),
                                         ),

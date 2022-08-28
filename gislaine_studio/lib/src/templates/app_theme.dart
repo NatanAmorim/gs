@@ -4,6 +4,11 @@ ThemeData appTheme = ThemeData(
   useMaterial3: true,
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
+      textStyle: MaterialStateProperty.all(
+        const TextStyle(
+          fontSize: 24,
+        ),
+      ),
       foregroundColor: MaterialStateProperty.all(
         Colors.white,
       ),
@@ -16,7 +21,6 @@ ThemeData appTheme = ThemeData(
     thumbVisibility: MaterialStateProperty.all(true),
     thumbColor: MaterialStateProperty.all(Colors.grey),
     thickness: MaterialStateProperty.all(10),
-    radius: Radius.zero,
   ),
   dividerColor: const Color(0xFFeaa4a4),
   cardTheme: const CardTheme(
@@ -27,7 +31,6 @@ ThemeData appTheme = ThemeData(
     primarySwatch: Colors.pink,
     cardColor: const Color(0xFFffdbcf),
     accentColor: const Color(0xFF720e5d),
-    // errorColor: const Color(0xFFba1a1a),
     errorColor: const Color(0xFFFF9800),
     backgroundColor: const Color(0xFFFEEAE6),
   ),

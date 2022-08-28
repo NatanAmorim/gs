@@ -69,9 +69,6 @@ class _FormProductState extends State<FormProduct> {
                                             padding: EdgeInsets.all(4.0),
                                             child: Text(
                                               'Salvar',
-                                              style: TextStyle(
-                                                fontSize: 24,
-                                              ),
                                             ),
                                           ),
                                         ),

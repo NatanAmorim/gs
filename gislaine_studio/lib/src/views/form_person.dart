@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:gislaine_studio/src/controllers/form_person_controller.dart';
 import 'package:gislaine_studio/src/templates/widgets/textformfield_template.dart';
 
 class FormPerson extends StatefulWidget {
-  const FormPerson({Key? key}) : super(key: key);
+  const FormPerson({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<FormPerson> createState() => _FormPersonState();
 }
 
 class _FormPersonState extends State<FormPerson> {
+  late FormPersonController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = FormPersonController();
+    controller.onInit();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,49 +60,58 @@ class _FormPersonState extends State<FormPerson> {
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline4!
-                                      .copyWith(color: Colors.brown),
+                                      .copyWith(
+                                        color: Colors.pink.withOpacity(0.5),
+                                      ),
                                 ),
                                 const Divider(),
                                 const SizedBox(height: 15),
                                 Form(
+                                  key: controller.formKey,
                                   autovalidateMode:
                                       AutovalidateMode.onUserInteraction,
                                   child: Column(
                                     children: [
-                                      const TextFormFieldTemplate(
+                                      TextFormFieldTemplate(
                                         label: 'Nome',
+                                        onSaved: (String? text) =>
+                                            controller.person.nome = text,
+                                        validator: (String? value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Digite o nome';
+                                          }
+                                          return null;
+                                        },
                                       ),
                                       const SizedBox(height: 16),
-                                      const TextFormFieldTemplate(
+                                      TextFormFieldTemplate(
                                         label: 'Celular',
+                                        onSaved: (String? text) =>
+                                            controller.person.celular = text,
                                       ),
                                       const SizedBox(height: 16),
-                                      const TextFormFieldTemplate(
+                                      TextFormFieldTemplate(
                                         label: 'Data de nascimento',
+                                        onSaved: (String? text) => controller
+                                            .person.dataNascimento = text,
                                       ),
                                       const SizedBox(height: 16),
                                       // FIX se for menor de 18 anos, não pedir CPF
-                                      const TextFormFieldTemplate(
+                                      TextFormFieldTemplate(
                                         label: 'CPF',
+                                        onSaved: (String? text) {
+                                          controller.person.cpf = text;
+                                        },
                                       ),
                                       const SizedBox(height: 16),
                                       Align(
                                         alignment: Alignment.centerLeft,
                                         child: ElevatedButton(
-                                          style: ButtonStyle(
-                                            backgroundColor:
-                                                MaterialStateProperty.all(
-                                              const Color(0xFF720e5d),
-                                            ),
-                                          ),
-                                          onPressed: () {},
+                                          onPressed: controller.submit,
                                           child: const Padding(
                                             padding: EdgeInsets.all(4.0),
                                             child: Text(
                                               'Salvar',
-                                              style: TextStyle(
-                                                fontSize: 24,
-                                              ),
                                             ),
                                           ),
                                         ),
