@@ -1,16 +1,29 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gislaine_studio/src/templates/app_theme.dart';
 import 'package:gislaine_studio/src/views/form_modality.dart';
 import 'package:gislaine_studio/src/views/form_order.dart';
-import 'package:gislaine_studio/src/views/form_person.dart';
 import 'package:gislaine_studio/src/views/form_product.dart';
+import 'package:gislaine_studio/src/views/form_student.dart';
 import 'package:gislaine_studio/src/views/inventory_screen.dart';
 import 'package:gislaine_studio/src/views/point_of_sale_screen.dart';
 import 'package:gislaine_studio/src/views/records_screen.dart';
 import 'package:gislaine_studio/src/views/transactions_screen.dart';
+import 'package:path/path.dart' as path_helper;
+import 'package:path_provider/path_provider.dart';
 
-void main() => runApp(const MyApp());
+// ignore: avoid_void_async
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final Directory documentsFolder = await getApplicationDocumentsDirectory();
+  final String documentsPath =
+      path_helper.join(documentsFolder.path, 'Gislaine Studio');
+
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -79,7 +92,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       await Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const FormPerson(),
+                          builder: (context) => const FormStudent(),
                         ),
                       );
                     },

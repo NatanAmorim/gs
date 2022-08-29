@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:gislaine_studio/src/models/person_model.dart';
+import 'package:gislaine_studio/src/models/student_model.dart';
 
-class FormPersonController {
+class FormStudentController {
+  FormStudentController({
+    this.studentUpdating,
+  });
+
+  final StudentModel? studentUpdating;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  late PersonModel person;
+  late StudentModel student;
 
   void onInit() {
-    person = PersonModel();
+    student = studentUpdating ?? StudentModel();
   }
 
   void submit() {

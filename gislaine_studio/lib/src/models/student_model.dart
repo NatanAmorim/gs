@@ -1,24 +1,19 @@
 import 'dart:convert';
 
-PersonModel personModelFromJson(String str) =>
-    PersonModel.fromJson(json.decode(str));
+StudentModel StudentModelFromJson(String str) =>
+    StudentModel.fromJson(json.decode(str));
 
-String personModelToJson(PersonModel data) => json.encode(data.toJson());
+String StudentModelToJson(StudentModel data) => json.encode(data.toJson());
 
-class PersonModel {
-  PersonModel({
+class StudentModel {
+  StudentModel({
     this.nome,
     this.dataNascimento,
     this.celular,
     this.cpf,
   });
 
-  String? nome;
-  String? dataNascimento;
-  String? celular;
-  String? cpf;
-
-  factory PersonModel.fromJson(Map<String, dynamic> json) => PersonModel(
+  factory StudentModel.fromJson(Map<String, dynamic> json) => StudentModel(
         nome: json["nome"],
         dataNascimento: json["data_nascimento"],
         celular: json["celular"],
@@ -31,4 +26,9 @@ class PersonModel {
         "celular": celular,
         "cpf": cpf,
       };
+
+  String? nome;
+  String? dataNascimento;
+  String? celular;
+  String? cpf;
 }

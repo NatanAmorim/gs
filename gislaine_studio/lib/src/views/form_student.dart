@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:gislaine_studio/src/controllers/form_person_controller.dart';
+import 'package:gislaine_studio/src/controllers/form_student_controller.dart';
 import 'package:gislaine_studio/src/templates/widgets/textformfield_template.dart';
 
-class FormPerson extends StatefulWidget {
-  const FormPerson({
+class FormStudent extends StatefulWidget {
+  const FormStudent({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<FormPerson> createState() => _FormPersonState();
+  State<FormStudent> createState() => _FormStudentState();
 }
 
-class _FormPersonState extends State<FormPerson> {
-  late FormPersonController controller;
+class _FormStudentState extends State<FormStudent> {
+  late FormStudentController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = FormPersonController();
+    controller = FormStudentController();
     controller.onInit();
   }
 
@@ -74,8 +74,9 @@ class _FormPersonState extends State<FormPerson> {
                                     children: [
                                       TextFormFieldTemplate(
                                         label: 'Nome',
+                                        initialValue: controller.student.nome,
                                         onSaved: (String? text) =>
-                                            controller.person.nome = text,
+                                            controller.student.nome = text,
                                         validator: (String? value) {
                                           if (value == null || value.isEmpty) {
                                             return 'Digite o nome';
@@ -86,21 +87,24 @@ class _FormPersonState extends State<FormPerson> {
                                       const SizedBox(height: 16),
                                       TextFormFieldTemplate(
                                         label: 'Celular',
+                                        initialValue:
+                                            controller.student.celular,
                                         onSaved: (String? text) =>
-                                            controller.person.celular = text,
+                                            controller.student.celular = text,
                                       ),
                                       const SizedBox(height: 16),
                                       TextFormFieldTemplate(
                                         label: 'Data de nascimento',
                                         onSaved: (String? text) => controller
-                                            .person.dataNascimento = text,
+                                            .student.dataNascimento = text,
                                       ),
                                       const SizedBox(height: 16),
                                       // FIX se for menor de 18 anos, não pedir CPF
                                       TextFormFieldTemplate(
                                         label: 'CPF',
+                                        initialValue: controller.student.cpf,
                                         onSaved: (String? text) {
-                                          controller.person.cpf = text;
+                                          controller.student.cpf = text;
                                         },
                                       ),
                                       const SizedBox(height: 16),
