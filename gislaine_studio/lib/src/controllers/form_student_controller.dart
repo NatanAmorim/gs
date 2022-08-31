@@ -8,11 +8,7 @@ class FormStudentController {
 
   final StudentModel? studentUpdating;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  late StudentModel student;
-
-  void onInit() {
-    student = studentUpdating ?? StudentModel();
-  }
+  late StudentModel student = studentUpdating ?? StudentModel();
 
   void submit() {
     formKey.currentState!.validate();

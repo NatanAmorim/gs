@@ -18,7 +18,6 @@ class _FormStudentState extends State<FormStudent> {
   void initState() {
     super.initState();
     controller = FormStudentController();
-    controller.onInit();
   }
 
   @override
