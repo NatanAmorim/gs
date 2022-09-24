@@ -1,11 +1,8 @@
 import 'package:drift/drift.dart';
 
-class Sale extends Table {
+class ProductsTable extends Table {
   IntColumn get id => integer().autoIncrement()();
-  IntColumn get discount => integer().nullable()();
+  TextColumn get name => text().withLength(min: 6, max: 140)();
   DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
   DateTimeColumn get updatedAt => dateTime().withDefault(currentDateAndTime)();
-  // nullable person sold to
-  // itens
-  // parcial payment
 }

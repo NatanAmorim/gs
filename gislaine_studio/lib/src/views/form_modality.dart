@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gislaine_studio/src/templates/widgets/textformfield_template.dart';
+import 'package:gislaine_studio/src/views/templates/widgets/textformfield_template.dart';
 
 class FormModality extends StatefulWidget {
   const FormModality({Key? key}) : super(key: key);
@@ -44,7 +44,7 @@ class _FormModalityState extends State<FormModality> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Formulário Modalidade',
+                                  'Cadastro de modalidade',
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline4!

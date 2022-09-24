@@ -8,6 +8,8 @@ class TextFormFieldTemplate extends StatefulWidget {
     this.validator,
     this.onTap,
     this.onSaved,
+    this.prefixIcon,
+    this.suffixIcon,
     this.textInputAction,
     this.onEditingComplete,
     Key? key,
@@ -19,6 +21,8 @@ class TextFormFieldTemplate extends StatefulWidget {
   final String? Function(String?)? validator;
   final void Function(String?)? onSaved;
   final void Function()? onTap;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final TextInputAction? textInputAction;
   final VoidCallback? onEditingComplete;
 
@@ -45,6 +49,8 @@ class _TextFormFieldTemplateState extends State<TextFormFieldTemplate> {
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.pink.withOpacity(0.1),
+        prefixIcon: widget.prefixIcon,
+        suffixIcon: widget.suffixIcon,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
         ),

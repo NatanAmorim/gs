@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gislaine_studio/src/templates/widgets/textformfield_template.dart';
+import 'package:gislaine_studio/src/views/templates/widgets/textformfield_template.dart';
 
 class FormProduct extends StatefulWidget {
   const FormProduct({Key? key}) : super(key: key);
@@ -44,7 +44,7 @@ class _FormProductState extends State<FormProduct> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Formulário Produto',
+                                  'Cadastro de produto',
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline4!
@@ -59,6 +59,32 @@ class _FormProductState extends State<FormProduct> {
                                     children: [
                                       const TextFormFieldTemplate(
                                         label: 'Nome',
+                                      ),
+                                      const SizedBox(height: 16),
+                                      Row(
+                                        children: [
+                                          const Flexible(
+                                            flex: 1,
+                                            child: TextFormFieldTemplate(
+                                              label: 'Preço',
+                                            ),
+                                          ),
+                                          const SizedBox(width: 10),
+                                          Flexible(
+                                            flex: 1,
+                                            child: TextFormFieldTemplate(
+                                              label: 'Estoque minimo',
+                                              suffixIcon: IconButton(
+                                                onPressed: () {},
+                                                icon: const Icon(Icons.add),
+                                              ),
+                                              prefixIcon: IconButton(
+                                                onPressed: () {},
+                                                icon: const Icon(Icons.remove),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                       const SizedBox(height: 16),
                                       Align(

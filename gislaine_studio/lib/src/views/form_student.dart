@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gislaine_studio/src/controllers/form_student_controller.dart';
-import 'package:gislaine_studio/src/templates/widgets/textformfield_template.dart';
+import 'package:gislaine_studio/src/views/templates/widgets/textformfield_template.dart';
 
 class FormStudent extends StatefulWidget {
   const FormStudent({
@@ -55,7 +55,7 @@ class _FormStudentState extends State<FormStudent> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Formulário Aluno',
+                                  'Cadastro de aluno',
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline4!

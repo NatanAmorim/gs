@@ -43,7 +43,7 @@ class _FormOrderState extends State<FormOrder> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Formulário Encomenda',
+                                  'Cadastro de encomenda',
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline4!
@@ -58,6 +58,9 @@ class _FormOrderState extends State<FormOrder> {
                                       .headline4!
                                       .copyWith(color: Colors.deepOrangeAccent),
                                 ),
+                                // TODO: dropdown selecionar aluno
+                                // TODO: dropdown selecionar produtos
+                                // TODO: produto não listado?
                               ],
                             ),
                           ),

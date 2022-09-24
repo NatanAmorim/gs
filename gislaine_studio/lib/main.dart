@@ -2,7 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:gislaine_studio/src/templates/app_theme.dart';
+import 'package:gislaine_studio/src/database.dart';
+import 'package:gislaine_studio/src/views/templates/app_theme.dart';
 import 'package:gislaine_studio/src/views/form_modality.dart';
 import 'package:gislaine_studio/src/views/form_order.dart';
 import 'package:gislaine_studio/src/views/form_product.dart';
@@ -22,7 +23,27 @@ void main() async {
   final String documentsPath =
       path_helper.join(documentsFolder.path, 'Gislaine Studio');
 
+  // Drif getting started
+  // https://drift.simonbinder.eu/docs/getting-started/
+  // index, triggers
+  // https://drift.simonbinder.eu/docs/using-sql/drift_files/
+  // https://drift.simonbinder.eu/api/drift/migrator-class
+  // views
+  // https://drift.simonbinder.eu/docs/getting-started/advanced_dart_tables/
+  // queries
+  // https://drift.simonbinder.eu/docs/getting-started/writing_queries/
+  // vanillar flutter or provider
+  // https: //drift.simonbinder.eu/faq/#using-the-database
+  final database = MyDatabase();
+
   runApp(const MyApp());
+}
+
+enum FabRoutes {
+  student,
+  product,
+  order,
+  modality,
 }
 
 class MyApp extends StatelessWidget {
@@ -72,83 +93,81 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           NavigationRail(
             selectedIndex: _selectedIndex,
             useIndicator: true,
+            selectedIconTheme:
+                IconThemeData(color: Theme.of(context).colorScheme.primary),
+            selectedLabelTextStyle: const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w600,
+            ),
             indicatorColor:
                 Theme.of(context).colorScheme.primary.withOpacity(0.3),
             leading: FloatingActionButton(
               heroTag: 'add',
               backgroundColor: Theme.of(context).colorScheme.tertiary,
               foregroundColor: Theme.of(context).colorScheme.onTertiary,
-              onPressed: () => showMenu(
-                context: context,
-                position: RelativeRect.fill,
-                elevation: 8,
-                items: [
-                  PopupMenuItem<String>(
-                    onTap: () async {
-                      // The following line is only added because
-                      // the navigator does not push without it
-                      await Future.delayed(const Duration(milliseconds: 1));
-                      // ignore: use_build_context_synchronously
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const FormStudent(),
-                        ),
-                      );
-                    },
-                    value: 'Novo aluno',
-                    child: const Text('Novo aluno'),
-                  ),
-                  PopupMenuItem<String>(
-                    onTap: () async {
-                      // The following line is only added because
-                      // the navigator does not push without it
-                      await Future.delayed(const Duration(milliseconds: 1));
-                      // ignore: use_build_context_synchronously
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const FormProduct(),
-                        ),
-                      );
-                    },
-                    value: 'Novo produto',
-                    child: const Text('Novo produto'),
-                  ),
-                  PopupMenuItem<String>(
-                    onTap: () async {
-                      // The following line is only added because
-                      // the navigator does not push without it
-                      await Future.delayed(const Duration(milliseconds: 1));
-                      // ignore: use_build_context_synchronously
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const FormOrder(),
-                        ),
-                      );
-                    },
-                    value: 'Nova encomenda',
-                    child: const Text('Nova encomenda'),
-                  ),
-                  PopupMenuItem<String>(
-                    onTap: () async {
-                      // The following line is only added because
-                      // the navigator does not push without it
-                      await Future.delayed(const Duration(milliseconds: 1));
-                      // ignore: use_build_context_synchronously
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const FormModality(),
-                        ),
-                      );
-                    },
-                    value: 'Nova modalidade',
-                    child: const Text('Nova modalidade'),
-                  ),
-                ],
-              ),
+              onPressed: () async {
+                final NavigatorState navigator = Navigator.of(context);
+                final FabRoutes? routeSelected = await showMenu<FabRoutes>(
+                  context: context,
+                  position: RelativeRect.fill,
+                  elevation: 8,
+                  items: [
+                    const PopupMenuItem<FabRoutes>(
+                      value: FabRoutes.student,
+                      child: Text('Novo aluno'),
+                    ),
+                    const PopupMenuItem<FabRoutes>(
+                      value: FabRoutes.product,
+                      child: Text('Novo produto'),
+                    ),
+                    const PopupMenuItem<FabRoutes>(
+                      value: FabRoutes.order,
+                      child: Text('Nova encomenda'),
+                    ),
+                    const PopupMenuItem<FabRoutes>(
+                      value: FabRoutes.modality,
+                      child: Text('Nova modalidade'),
+                    ),
+                  ],
+                );
+
+                switch (routeSelected) {
+                  case FabRoutes.student:
+                    await navigator.push(
+                      MaterialPageRoute(
+                        builder: (context) => const FormStudent(),
+                      ),
+                    );
+                    break;
+
+                  case FabRoutes.product:
+                    await navigator.push(
+                      MaterialPageRoute(
+                        builder: (context) => const FormProduct(),
+                      ),
+                    );
+                    break;
+
+                  case FabRoutes.order:
+                    await navigator.push(
+                      MaterialPageRoute(
+                        builder: (context) => const FormOrder(),
+                      ),
+                    );
+                    break;
+
+                  case FabRoutes.modality:
+                    await navigator.push(
+                      MaterialPageRoute(
+                        builder: (context) => const FormModality(),
+                      ),
+                    );
+                    break;
+
+                  default:
+                    break;
+                }
+              },
               child: const Icon(Icons.add),
             ),
             trailing: Expanded(
