@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gislaine_studio/src/controllers/form_order_controller.dart';
+import 'package:gislaine_studio/src/views/templates/widgets/elevated_button_template.dart';
 
 class FormOrder extends StatefulWidget {
   const FormOrder({Key? key}) : super(key: key);
@@ -8,6 +10,14 @@ class FormOrder extends StatefulWidget {
 }
 
 class _FormOrderState extends State<FormOrder> {
+  late FormOrderController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = FormOrderController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,6 +71,16 @@ class _FormOrderState extends State<FormOrder> {
                                 // TODO: dropdown selecionar aluno
                                 // TODO: dropdown selecionar produtos
                                 // TODO: produto não listado?
+                                const SizedBox(height: 16),
+
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: ElevatedButtonTemplate(
+                                    onPressed: controller.submit,
+                                    icon: Icons.save,
+                                    label: 'Salvar',
+                                  ),
+                                ),
                               ],
                             ),
                           ),

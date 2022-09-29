@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gislaine_studio/src/templates/widgets/tabbar_template.dart';
+import 'package:gislaine_studio/src/views/templates/widgets/tabbar_template.dart';
 
 class RecordsScreen extends StatefulWidget {
   const RecordsScreen({Key? key}) : super(key: key);

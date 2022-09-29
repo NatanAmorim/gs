@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gislaine_studio/src/controllers/form_modality_controller.dart';
+import 'package:gislaine_studio/src/views/templates/widgets/elevated_button_template.dart';
 import 'package:gislaine_studio/src/views/templates/widgets/textformfield_template.dart';
 
 class FormModality extends StatefulWidget {
@@ -9,6 +11,14 @@ class FormModality extends StatefulWidget {
 }
 
 class _FormModalityState extends State<FormModality> {
+  late FormModalityController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = FormModalityController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,14 +77,10 @@ class _FormModalityState extends State<FormModality> {
                                       const SizedBox(height: 16),
                                       Align(
                                         alignment: Alignment.centerLeft,
-                                        child: ElevatedButton(
-                                          onPressed: () {},
-                                          child: const Padding(
-                                            padding: EdgeInsets.all(4.0),
-                                            child: Text(
-                                              'Salvar',
-                                            ),
-                                          ),
+                                        child: ElevatedButtonTemplate(
+                                          onPressed: controller.submit,
+                                          icon: Icons.save,
+                                          label: 'Salvar',
                                         ),
                                       ),
                                       const SizedBox(height: 10),

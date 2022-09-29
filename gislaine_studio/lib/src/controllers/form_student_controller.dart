@@ -10,15 +10,17 @@ class FormStudentController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   late StudentModel student = studentUpdating ?? StudentModel();
 
-  void submit() {
+  Future<bool> submit() async {
     formKey.currentState!.validate();
 
     final bool isValid = formKey.currentState!.validate();
 
     if (!isValid) {
-      return;
+      return false;
     }
 
     formKey.currentState!.save();
+
+    return true;
   }
 }

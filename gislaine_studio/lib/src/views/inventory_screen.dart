@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gislaine_studio/src/templates/widgets/tabbar_template.dart';
+import 'package:gislaine_studio/src/views/templates/widgets/tabbar_template.dart';
 
 class InventoryScreen extends StatefulWidget {
   const InventoryScreen({Key? key}) : super(key: key);

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:gislaine_studio/src/controllers/form_product_controller.dart';
+import 'package:gislaine_studio/src/utils/formatters/brl_input_formatter.dart';
+import 'package:gislaine_studio/src/views/templates/widgets/elevated_button_template.dart';
 import 'package:gislaine_studio/src/views/templates/widgets/textformfield_template.dart';
 
 class FormProduct extends StatefulWidget {
@@ -9,6 +13,14 @@ class FormProduct extends StatefulWidget {
 }
 
 class _FormProductState extends State<FormProduct> {
+  late FormProductController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = FormProductController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,16 +69,28 @@ class _FormProductState extends State<FormProduct> {
                                       AutovalidateMode.onUserInteraction,
                                   child: Column(
                                     children: [
-                                      const TextFormFieldTemplate(
+                                      TextFormFieldTemplate(
                                         label: 'Nome',
+                                        autofocus: true,
+                                        validator: (String? value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Digite o nome';
+                                          }
+                                          return null;
+                                        },
                                       ),
                                       const SizedBox(height: 16),
                                       Row(
                                         children: [
-                                          const Flexible(
+                                          Flexible(
                                             flex: 1,
                                             child: TextFormFieldTemplate(
                                               label: 'Preço',
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly,
+                                                BrlInputFormatter()
+                                              ],
                                             ),
                                           ),
                                           const SizedBox(width: 10),
@@ -74,14 +98,10 @@ class _FormProductState extends State<FormProduct> {
                                             flex: 1,
                                             child: TextFormFieldTemplate(
                                               label: 'Estoque minimo',
-                                              suffixIcon: IconButton(
-                                                onPressed: () {},
-                                                icon: const Icon(Icons.add),
-                                              ),
-                                              prefixIcon: IconButton(
-                                                onPressed: () {},
-                                                icon: const Icon(Icons.remove),
-                                              ),
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly,
+                                              ],
                                             ),
                                           ),
                                         ],
@@ -89,14 +109,10 @@ class _FormProductState extends State<FormProduct> {
                                       const SizedBox(height: 16),
                                       Align(
                                         alignment: Alignment.centerLeft,
-                                        child: ElevatedButton(
-                                          onPressed: () {},
-                                          child: const Padding(
-                                            padding: EdgeInsets.all(4.0),
-                                            child: Text(
-                                              'Salvar',
-                                            ),
-                                          ),
+                                        child: ElevatedButtonTemplate(
+                                          onPressed: controller.submit,
+                                          icon: Icons.save,
+                                          label: 'Salvar',
                                         ),
                                       ),
                                       const SizedBox(height: 10),

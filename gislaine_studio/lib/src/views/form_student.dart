@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gislaine_studio/src/controllers/form_student_controller.dart';
+import 'package:gislaine_studio/src/utils/formatters/cep_input_formatter.dart';
+import 'package:gislaine_studio/src/utils/formatters/cpf_input_formatter.dart';
+import 'package:gislaine_studio/src/utils/formatters/date_input_formatter.dart';
+import 'package:gislaine_studio/src/utils/formatters/phone_input_formatter.dart';
+import 'package:gislaine_studio/src/views/templates/widgets/elevated_button_template.dart';
 import 'package:gislaine_studio/src/views/templates/widgets/textformfield_template.dart';
 
 class FormStudent extends StatefulWidget {
@@ -73,6 +79,7 @@ class _FormStudentState extends State<FormStudent> {
                                     children: [
                                       TextFormFieldTemplate(
                                         label: 'Nome',
+                                        autofocus: true,
                                         initialValue: controller.student.nome,
                                         onSaved: (String? text) =>
                                             controller.student.nome = text,
@@ -86,6 +93,11 @@ class _FormStudentState extends State<FormStudent> {
                                       const SizedBox(height: 16),
                                       TextFormFieldTemplate(
                                         label: 'Celular',
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter
+                                              .digitsOnly,
+                                          PhoneInputFormatter(),
+                                        ],
                                         initialValue:
                                             controller.student.celular,
                                         onSaved: (String? text) =>
@@ -94,6 +106,11 @@ class _FormStudentState extends State<FormStudent> {
                                       const SizedBox(height: 16),
                                       TextFormFieldTemplate(
                                         label: 'Data de nascimento',
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter
+                                              .digitsOnly,
+                                          DateInputFormatter(),
+                                        ],
                                         onSaved: (String? text) => controller
                                             .student.dataNascimento = text,
                                       ),
@@ -102,21 +119,56 @@ class _FormStudentState extends State<FormStudent> {
                                       TextFormFieldTemplate(
                                         label: 'CPF',
                                         initialValue: controller.student.cpf,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter
+                                              .digitsOnly,
+                                          CpfInputFormatter(),
+                                        ],
                                         onSaved: (String? text) {
                                           controller.student.cpf = text;
                                         },
                                       ),
                                       const SizedBox(height: 16),
+                                      TextFormFieldTemplate(
+                                        label: 'CEP',
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter
+                                              .digitsOnly,
+                                          CepInputFormatter(),
+                                        ],
+                                        onSaved: (String? text) => controller
+                                            .student.dataNascimento = text,
+                                      ),
+                                      const SizedBox(height: 16),
+                                      TextFormFieldTemplate(
+                                        label: 'Endereço',
+                                        onSaved: (String? text) => controller
+                                            .student.dataNascimento = text,
+                                      ),
+                                      const SizedBox(height: 16),
+                                      TextFormFieldTemplate(
+                                        label: 'Nome do responsável',
+                                        onSaved: (String? text) => controller
+                                            .student.dataNascimento = text,
+                                      ),
+                                      const SizedBox(height: 16),
+                                      TextFormFieldTemplate(
+                                        label: 'CPF do responsável',
+                                        onSaved: (String? text) => controller
+                                            .student.dataNascimento = text,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter
+                                              .digitsOnly,
+                                          CpfInputFormatter(),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 16),
                                       Align(
                                         alignment: Alignment.centerLeft,
-                                        child: ElevatedButton(
+                                        child: ElevatedButtonTemplate(
+                                          icon: Icons.save,
+                                          label: 'Salvar',
                                           onPressed: controller.submit,
-                                          child: const Padding(
-                                            padding: EdgeInsets.all(4.0),
-                                            child: Text(
-                                              'Salvar',
-                                            ),
-                                          ),
                                         ),
                                       ),
                                       const SizedBox(height: 10),
