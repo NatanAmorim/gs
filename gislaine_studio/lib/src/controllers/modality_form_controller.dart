@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gislaine_studio/src/models/student_model.dart';
 
-class FormStudentController {
-  FormStudentController({
-    this.studentUpdating,
-  });
-
-  final StudentModel? studentUpdating;
+class ModalityFormController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  late StudentModel student = studentUpdating ?? StudentModel();
 
   Future<bool> submit() async {
     formKey.currentState!.validate();

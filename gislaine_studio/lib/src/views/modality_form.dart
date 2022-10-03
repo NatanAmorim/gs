@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:gislaine_studio/src/controllers/form_product_controller.dart';
-import 'package:gislaine_studio/src/utils/formatters/brl_input_formatter.dart';
+import 'package:gislaine_studio/src/controllers/modality_form_controller.dart';
 import 'package:gislaine_studio/src/views/templates/widgets/elevated_button_template.dart';
 import 'package:gislaine_studio/src/views/templates/widgets/textformfield_template.dart';
 
-class FormProduct extends StatefulWidget {
-  const FormProduct({Key? key}) : super(key: key);
+class ModalityForm extends StatefulWidget {
+  const ModalityForm({Key? key}) : super(key: key);
 
   @override
-  State<FormProduct> createState() => _FormProductState();
+  State<ModalityForm> createState() => _ModalityFormState();
 }
 
-class _FormProductState extends State<FormProduct> {
-  late FormProductController controller;
+class _ModalityFormState extends State<ModalityForm> {
+  late ModalityFormController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = FormProductController();
+    controller = ModalityFormController();
   }
 
   @override
@@ -56,7 +54,7 @@ class _FormProductState extends State<FormProduct> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Cadastro de produto',
+                                  'Cadastro de modalidade',
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline4!
@@ -69,42 +67,12 @@ class _FormProductState extends State<FormProduct> {
                                       AutovalidateMode.onUserInteraction,
                                   child: Column(
                                     children: [
-                                      TextFormFieldTemplate(
+                                      const TextFormFieldTemplate(
                                         label: 'Nome',
-                                        autofocus: true,
-                                        validator: (String? value) {
-                                          if (value == null || value.isEmpty) {
-                                            return 'Digite o nome';
-                                          }
-                                          return null;
-                                        },
                                       ),
                                       const SizedBox(height: 16),
-                                      Row(
-                                        children: [
-                                          Flexible(
-                                            flex: 1,
-                                            child: TextFormFieldTemplate(
-                                              label: 'Preço',
-                                              inputFormatters: [
-                                                FilteringTextInputFormatter
-                                                    .digitsOnly,
-                                                BrlInputFormatter()
-                                              ],
-                                            ),
-                                          ),
-                                          const SizedBox(width: 10),
-                                          Flexible(
-                                            flex: 1,
-                                            child: TextFormFieldTemplate(
-                                              label: 'Estoque minimo',
-                                              inputFormatters: [
-                                                FilteringTextInputFormatter
-                                                    .digitsOnly,
-                                              ],
-                                            ),
-                                          ),
-                                        ],
+                                      const TextFormFieldTemplate(
+                                        label: 'Preço/Valor',
                                       ),
                                       const SizedBox(height: 16),
                                       Align(

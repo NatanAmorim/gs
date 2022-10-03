@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:gislaine_studio/src/controllers/form_modality_controller.dart';
+import 'package:flutter/services.dart';
+import 'package:gislaine_studio/src/controllers/product_form_controller.dart';
+import 'package:gislaine_studio/src/utils/formatters/brl_input_formatter.dart';
 import 'package:gislaine_studio/src/views/templates/widgets/elevated_button_template.dart';
 import 'package:gislaine_studio/src/views/templates/widgets/textformfield_template.dart';
 
-class FormModality extends StatefulWidget {
-  const FormModality({Key? key}) : super(key: key);
+class ProductForm extends StatefulWidget {
+  const ProductForm({Key? key}) : super(key: key);
 
   @override
-  State<FormModality> createState() => _FormModalityState();
+  State<ProductForm> createState() => _ProductFormState();
 }
 
-class _FormModalityState extends State<FormModality> {
-  late FormModalityController controller;
+class _ProductFormState extends State<ProductForm> {
+  late ProductFormController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = FormModalityController();
+    controller = ProductFormController();
   }
 
   @override
@@ -54,7 +56,7 @@ class _FormModalityState extends State<FormModality> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Cadastro de modalidade',
+                                  'Cadastro de produto',
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline4!
@@ -67,12 +69,42 @@ class _FormModalityState extends State<FormModality> {
                                       AutovalidateMode.onUserInteraction,
                                   child: Column(
                                     children: [
-                                      const TextFormFieldTemplate(
+                                      TextFormFieldTemplate(
                                         label: 'Nome',
+                                        autofocus: true,
+                                        validator: (String? value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Digite o nome';
+                                          }
+                                          return null;
+                                        },
                                       ),
                                       const SizedBox(height: 16),
-                                      const TextFormFieldTemplate(
-                                        label: 'Preço/Valor',
+                                      Row(
+                                        children: [
+                                          Flexible(
+                                            flex: 1,
+                                            child: TextFormFieldTemplate(
+                                              label: 'Preço',
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly,
+                                                BrlInputFormatter()
+                                              ],
+                                            ),
+                                          ),
+                                          const SizedBox(width: 10),
+                                          Flexible(
+                                            flex: 1,
+                                            child: TextFormFieldTemplate(
+                                              label: 'Estoque minimo',
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly,
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                       const SizedBox(height: 16),
                                       Align(

@@ -7,4 +7,5 @@ class OrderItemsTable extends Table {
   IntColumn get order => integer().references(OrdersTable, #id)();
   IntColumn get product => integer().references(ProductsTable, #id)();
   IntColumn get quantity => integer()();
+  RealColumn get unitPrice => real()();
 }

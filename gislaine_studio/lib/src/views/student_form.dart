@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gislaine_studio/src/controllers/form_student_controller.dart';
+import 'package:gislaine_studio/src/controllers/student_form_controller.dart';
 import 'package:gislaine_studio/src/utils/formatters/cep_input_formatter.dart';
 import 'package:gislaine_studio/src/utils/formatters/cpf_input_formatter.dart';
 import 'package:gislaine_studio/src/utils/formatters/date_input_formatter.dart';
@@ -8,22 +8,22 @@ import 'package:gislaine_studio/src/utils/formatters/phone_input_formatter.dart'
 import 'package:gislaine_studio/src/views/templates/widgets/elevated_button_template.dart';
 import 'package:gislaine_studio/src/views/templates/widgets/textformfield_template.dart';
 
-class FormStudent extends StatefulWidget {
-  const FormStudent({
+class StudentForm extends StatefulWidget {
+  const StudentForm({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<FormStudent> createState() => _FormStudentState();
+  State<StudentForm> createState() => _StudentFormState();
 }
 
-class _FormStudentState extends State<FormStudent> {
-  late FormStudentController controller;
+class _StudentFormState extends State<StudentForm> {
+  late StudentFormController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = FormStudentController();
+    controller = StudentFormController();
   }
 
   @override

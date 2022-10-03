@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class FormProductController {
+class ProductFormController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   Future<bool> submit() async {

@@ -5,6 +5,6 @@ import 'package:gislaine_studio/src/database/sales_table.dart';
 class SalesPaymentsTable extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get sale => integer().references(SalesTable, #id)();
-  IntColumn get method =>
+  IntColumn get paymentMethod =>
       integer().nullable().references(PaymentMethodsTable, #id)();
 }

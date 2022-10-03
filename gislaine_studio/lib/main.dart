@@ -3,14 +3,14 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gislaine_studio/src/database.dart';
-import 'package:gislaine_studio/src/views/templates/app_theme.dart';
-import 'package:gislaine_studio/src/views/form_modality.dart';
-import 'package:gislaine_studio/src/views/form_order.dart';
-import 'package:gislaine_studio/src/views/form_product.dart';
-import 'package:gislaine_studio/src/views/form_student.dart';
 import 'package:gislaine_studio/src/views/inventory_screen.dart';
+import 'package:gislaine_studio/src/views/modality_form.dart';
+import 'package:gislaine_studio/src/views/order_form.dart';
 import 'package:gislaine_studio/src/views/point_of_sale_screen.dart';
+import 'package:gislaine_studio/src/views/product_form.dart';
 import 'package:gislaine_studio/src/views/records_screen.dart';
+import 'package:gislaine_studio/src/views/student_form.dart';
+import 'package:gislaine_studio/src/views/templates/app_theme.dart';
 import 'package:gislaine_studio/src/views/transactions_screen.dart';
 import 'package:path/path.dart' as path_helper;
 import 'package:path_provider/path_provider.dart';
@@ -135,7 +135,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   case FabRoutes.student:
                     await navigator.push(
                       MaterialPageRoute(
-                        builder: (context) => const FormStudent(),
+                        builder: (context) => const StudentForm(),
                       ),
                     );
                     break;
@@ -143,7 +143,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   case FabRoutes.product:
                     await navigator.push(
                       MaterialPageRoute(
-                        builder: (context) => const FormProduct(),
+                        builder: (context) => const ProductForm(),
                       ),
                     );
                     break;
@@ -151,7 +151,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   case FabRoutes.order:
                     await navigator.push(
                       MaterialPageRoute(
-                        builder: (context) => const FormOrder(),
+                        builder: (context) => const OrderForm(),
                       ),
                     );
                     break;
@@ -159,7 +159,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   case FabRoutes.modality:
                     await navigator.push(
                       MaterialPageRoute(
-                        builder: (context) => const FormModality(),
+                        builder: (context) => const ModalityForm(),
                       ),
                     );
                     break;

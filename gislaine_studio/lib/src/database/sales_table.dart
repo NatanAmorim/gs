@@ -5,9 +5,7 @@ class SalesTable extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get client => integer().nullable().references(ClientsTable, #id)();
   IntColumn get discount => integer().nullable()();
-  BoolColumn get isPaid => boolean()();
+  RealColumn get amountPaid => real()();
   DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
   DateTimeColumn get updatedAt => dateTime().withDefault(currentDateAndTime)();
-  // Items
-  // parcial payment
 }

@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:gislaine_studio/src/database/clients_table.dart';
-import 'package:gislaine_studio/src/database/modality_table.dart';
+import 'package:gislaine_studio/src/database/modalities_table.dart';
 
 class ModalitiesSubscribedTable extends Table {
   IntColumn get id => integer().autoIncrement()();

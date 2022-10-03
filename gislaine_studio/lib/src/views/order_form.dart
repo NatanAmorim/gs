@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:gislaine_studio/src/controllers/form_order_controller.dart';
+import 'package:gislaine_studio/src/controllers/order_form_controller.dart';
 import 'package:gislaine_studio/src/views/templates/widgets/elevated_button_template.dart';
 
-class FormOrder extends StatefulWidget {
-  const FormOrder({Key? key}) : super(key: key);
+class OrderForm extends StatefulWidget {
+  const OrderForm({Key? key}) : super(key: key);
 
   @override
-  State<FormOrder> createState() => _FormOrderState();
+  State<OrderForm> createState() => _OrderFormState();
 }
 
-class _FormOrderState extends State<FormOrder> {
-  late FormOrderController controller;
+class _OrderFormState extends State<OrderForm> {
+  late OrderFormController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = FormOrderController();
+    controller = OrderFormController();
   }
 
   @override

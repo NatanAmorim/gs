@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class FormOrderController {
+class OrderFormController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   Future<bool> submit() async {
