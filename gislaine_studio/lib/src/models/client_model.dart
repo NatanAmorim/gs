@@ -1,19 +1,19 @@
 import 'dart:convert';
 
-StudentModel StudentModelFromJson(String str) =>
-    StudentModel.fromJson(json.decode(str));
+ClientModel ClientModelFromJson(String str) =>
+    ClientModel.fromJson(json.decode(str));
 
-String StudentModelToJson(StudentModel data) => json.encode(data.toJson());
+String ClientModelToJson(ClientModel data) => json.encode(data.toJson());
 
-class StudentModel {
-  StudentModel({
+class ClientModel {
+  ClientModel({
     this.nome,
     this.dataNascimento,
     this.celular,
     this.cpf,
   });
 
-  factory StudentModel.fromJson(Map<String, dynamic> json) => StudentModel(
+  factory ClientModel.fromJson(Map<String, dynamic> json) => ClientModel(
         nome: json["nome"],
         dataNascimento: json["data_nascimento"],
         celular: json["celular"],

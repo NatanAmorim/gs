@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:gislaine_studio/src/models/student_model.dart';
+import 'package:gislaine_studio/src/models/client_model.dart';
 
-class StudentFormController {
-  StudentFormController({
-    this.studentUpdating,
+class ClientFormController {
+  ClientFormController({
+    this.clientUpdating,
   });
 
-  final StudentModel? studentUpdating;
+  final ClientModel? clientUpdating;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  late StudentModel student = studentUpdating ?? StudentModel();
+  late ClientModel client = clientUpdating ?? ClientModel();
 
   Future<bool> submit() async {
     formKey.currentState!.validate();

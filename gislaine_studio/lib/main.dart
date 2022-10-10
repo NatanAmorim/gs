@@ -9,7 +9,7 @@ import 'package:gislaine_studio/src/views/order_form.dart';
 import 'package:gislaine_studio/src/views/point_of_sale_screen.dart';
 import 'package:gislaine_studio/src/views/product_form.dart';
 import 'package:gislaine_studio/src/views/records_screen.dart';
-import 'package:gislaine_studio/src/views/student_form.dart';
+import 'package:gislaine_studio/src/views/client_form.dart';
 import 'package:gislaine_studio/src/views/templates/app_theme.dart';
 import 'package:gislaine_studio/src/views/transactions_screen.dart';
 import 'package:path/path.dart' as path_helper;
@@ -34,13 +34,13 @@ void main() async {
   // https://drift.simonbinder.eu/docs/getting-started/writing_queries/
   // vanillar flutter or provider
   // https: //drift.simonbinder.eu/faq/#using-the-database
-  final database = MyDatabase();
+  // final database = MyDatabase();
 
   runApp(const MyApp());
 }
 
 enum FabRoutes {
-  student,
+  client,
   product,
   order,
   modality,
@@ -113,7 +113,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   elevation: 8,
                   items: [
                     const PopupMenuItem<FabRoutes>(
-                      value: FabRoutes.student,
+                      value: FabRoutes.client,
                       child: Text('Novo aluno'),
                     ),
                     const PopupMenuItem<FabRoutes>(
@@ -132,10 +132,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 );
 
                 switch (routeSelected) {
-                  case FabRoutes.student:
+                  case FabRoutes.client:
                     await navigator.push(
                       MaterialPageRoute(
-                        builder: (context) => const StudentForm(),
+                        builder: (context) => const ClientForm(),
                       ),
                     );
                     break;

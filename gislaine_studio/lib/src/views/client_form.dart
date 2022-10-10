@@ -1,29 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gislaine_studio/src/controllers/student_form_controller.dart';
+import 'package:gislaine_studio/src/controllers/client_form_controller.dart';
 import 'package:gislaine_studio/src/utils/formatters/cep_input_formatter.dart';
 import 'package:gislaine_studio/src/utils/formatters/cpf_input_formatter.dart';
 import 'package:gislaine_studio/src/utils/formatters/date_input_formatter.dart';
 import 'package:gislaine_studio/src/utils/formatters/phone_input_formatter.dart';
+import 'package:gislaine_studio/src/utils/values_converter.dart';
 import 'package:gislaine_studio/src/views/templates/widgets/elevated_button_template.dart';
 import 'package:gislaine_studio/src/views/templates/widgets/textformfield_template.dart';
+import 'package:intl/intl.dart';
 
-class StudentForm extends StatefulWidget {
-  const StudentForm({
+class ClientForm extends StatefulWidget {
+  const ClientForm({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<StudentForm> createState() => _StudentFormState();
+  State<ClientForm> createState() => _ClientFormState();
 }
 
-class _StudentFormState extends State<StudentForm> {
-  late StudentFormController controller;
+class _ClientFormState extends State<ClientForm> {
+  late ClientFormController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = StudentFormController();
+    controller = ClientFormController();
   }
 
   @override
@@ -80,9 +82,9 @@ class _StudentFormState extends State<StudentForm> {
                                       TextFormFieldTemplate(
                                         label: 'Nome',
                                         autofocus: true,
-                                        initialValue: controller.student.nome,
+                                        initialValue: controller.client.nome,
                                         onSaved: (String? text) =>
-                                            controller.student.nome = text,
+                                            controller.client.nome = text,
                                         validator: (String? value) {
                                           if (value == null || value.isEmpty) {
                                             return 'Digite o nome';
@@ -98,10 +100,9 @@ class _StudentFormState extends State<StudentForm> {
                                               .digitsOnly,
                                           PhoneInputFormatter(),
                                         ],
-                                        initialValue:
-                                            controller.student.celular,
+                                        initialValue: controller.client.celular,
                                         onSaved: (String? text) =>
-                                            controller.student.celular = text,
+                                            controller.client.celular = text,
                                       ),
                                       const SizedBox(height: 16),
                                       TextFormFieldTemplate(
@@ -111,21 +112,43 @@ class _StudentFormState extends State<StudentForm> {
                                               .digitsOnly,
                                           DateInputFormatter(),
                                         ],
+                                        onChanged: (String? text) {
+                                          if (text?.length == 10) {
+                                            final birthday =
+                                                DateFormat('dd/MM/yyyy')
+                                                    .parse(text!);
+
+                                            final DateTime today =
+                                                DateTime.now();
+                                            int age =
+                                                today.year - birthday.year;
+                                            if (today.month < birthday.month) {
+                                              age--;
+                                            }
+
+                                            if (today.month == birthday.month) {
+                                              if (today.day < birthday.day) {
+                                                age--;
+                                              }
+                                            }
+                                            print(age);
+                                          }
+                                        },
                                         onSaved: (String? text) => controller
-                                            .student.dataNascimento = text,
+                                            .client.dataNascimento = text,
                                       ),
                                       const SizedBox(height: 16),
                                       // FIX se for menor de 18 anos, não pedir CPF
                                       TextFormFieldTemplate(
                                         label: 'CPF',
-                                        initialValue: controller.student.cpf,
+                                        initialValue: controller.client.cpf,
                                         inputFormatters: [
                                           FilteringTextInputFormatter
                                               .digitsOnly,
                                           CpfInputFormatter(),
                                         ],
                                         onSaved: (String? text) {
-                                          controller.student.cpf = text;
+                                          controller.client.cpf = text;
                                         },
                                       ),
                                       const SizedBox(height: 16),
@@ -136,26 +159,36 @@ class _StudentFormState extends State<StudentForm> {
                                               .digitsOnly,
                                           CepInputFormatter(),
                                         ],
+                                        onChanged: (String? text) {
+                                          if (text?.length == 10) {
+                                            final String cep =
+                                                ValuesConverter.convertCep(
+                                              text ?? '',
+                                            );
+
+                                            // TODO: preencher dados do endereço
+                                          }
+                                        },
                                         onSaved: (String? text) => controller
-                                            .student.dataNascimento = text,
+                                            .client.dataNascimento = text,
                                       ),
                                       const SizedBox(height: 16),
                                       TextFormFieldTemplate(
                                         label: 'Endereço',
                                         onSaved: (String? text) => controller
-                                            .student.dataNascimento = text,
+                                            .client.dataNascimento = text,
                                       ),
                                       const SizedBox(height: 16),
                                       TextFormFieldTemplate(
                                         label: 'Nome do responsável',
                                         onSaved: (String? text) => controller
-                                            .student.dataNascimento = text,
+                                            .client.dataNascimento = text,
                                       ),
                                       const SizedBox(height: 16),
                                       TextFormFieldTemplate(
                                         label: 'CPF do responsável',
                                         onSaved: (String? text) => controller
-                                            .student.dataNascimento = text,
+                                            .client.dataNascimento = text,
                                         inputFormatters: [
                                           FilteringTextInputFormatter
                                               .digitsOnly,

@@ -10,6 +10,7 @@ class TextFormFieldTemplate extends StatefulWidget {
     this.validator,
     this.onTap,
     this.onSaved,
+    this.onChanged,
     this.onEditingComplete,
     this.onFieldSubmitted,
     this.helperText,
@@ -45,6 +46,7 @@ class TextFormFieldTemplate extends StatefulWidget {
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final void Function(String?)? onSaved;
+  final void Function(String?)? onChanged;
   final void Function()? onTap;
   final VoidCallback? onEditingComplete;
   final void Function(String?)? onFieldSubmitted;
@@ -65,6 +67,7 @@ class _TextFormFieldTemplateState extends State<TextFormFieldTemplate> {
       controller: widget.controller,
       onTap: widget.onTap,
       onSaved: widget.onSaved,
+      onChanged: widget.onChanged,
       onFieldSubmitted: widget.onFieldSubmitted,
       onEditingComplete: widget.onEditingComplete,
       obscureText: widget.isObscure,
