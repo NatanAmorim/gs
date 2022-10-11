@@ -1,13 +1,18 @@
+import 'dart:convert' as convert;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gislaine_studio/src/controllers/client_form_controller.dart';
+import 'package:gislaine_studio/src/models/viacep_model.dart';
 import 'package:gislaine_studio/src/utils/formatters/cep_input_formatter.dart';
 import 'package:gislaine_studio/src/utils/formatters/cpf_input_formatter.dart';
 import 'package:gislaine_studio/src/utils/formatters/date_input_formatter.dart';
 import 'package:gislaine_studio/src/utils/formatters/phone_input_formatter.dart';
+import 'package:gislaine_studio/src/utils/validators/cpf_validator.dart';
 import 'package:gislaine_studio/src/utils/values_converter.dart';
 import 'package:gislaine_studio/src/views/templates/widgets/elevated_button_template.dart';
 import 'package:gislaine_studio/src/views/templates/widgets/textformfield_template.dart';
+import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 class ClientForm extends StatefulWidget {
@@ -21,6 +26,9 @@ class ClientForm extends StatefulWidget {
 
 class _ClientFormState extends State<ClientForm> {
   late ClientFormController controller;
+  final ValueNotifier<TextEditingController> address =
+      ValueNotifier<TextEditingController>(TextEditingController());
+  bool isMinor = false;
 
   @override
   void initState() {
@@ -107,6 +115,12 @@ class _ClientFormState extends State<ClientForm> {
                                       const SizedBox(height: 16),
                                       TextFormFieldTemplate(
                                         label: 'Data de nascimento',
+                                        validator: (String? value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Digite a data de nascimento';
+                                          }
+                                          return null;
+                                        },
                                         inputFormatters: [
                                           FilteringTextInputFormatter
                                               .digitsOnly,
@@ -131,16 +145,32 @@ class _ClientFormState extends State<ClientForm> {
                                                 age--;
                                               }
                                             }
-                                            print(age);
+
+                                            if (age < 18) {
+                                              isMinor = true;
+                                            } else {
+                                              isMinor = false;
+                                            }
                                           }
                                         },
                                         onSaved: (String? text) => controller
                                             .client.dataNascimento = text,
                                       ),
                                       const SizedBox(height: 16),
-                                      // FIX se for menor de 18 anos, não pedir CPF
                                       TextFormFieldTemplate(
                                         label: 'CPF',
+                                        validator: (String? value) {
+                                          if (!isMinor &&
+                                              (value == null ||
+                                                  value.isEmpty)) {
+                                            return 'Digite o CPF';
+                                          }
+                                          if (!isMinor &&
+                                              !CPFValidator.isValid(value)) {
+                                            return 'CPF inválido';
+                                          }
+                                          return null;
+                                        },
                                         initialValue: controller.client.cpf,
                                         inputFormatters: [
                                           FilteringTextInputFormatter
@@ -159,36 +189,99 @@ class _ClientFormState extends State<ClientForm> {
                                               .digitsOnly,
                                           CepInputFormatter(),
                                         ],
-                                        onChanged: (String? text) {
+                                        onChanged: (String? text) async {
                                           if (text?.length == 10) {
                                             final String cep =
                                                 ValuesConverter.convertCep(
                                               text ?? '',
                                             );
 
-                                            // TODO: preencher dados do endereço
+                                            final url = Uri.https(
+                                              'viacep.com.br',
+                                              '/ws/$cep/json/',
+                                              {'q': '{http}'},
+                                            );
+
+                                            // Await the HTTP GET response, then decode the
+                                            // JSON data it contains.
+                                            final response =
+                                                await http.get(url);
+
+                                            if (response.statusCode == 200) {
+                                              final jsonResponse = convert
+                                                  .jsonDecode(response.body);
+
+                                              final ViacepModel viacep =
+                                                  ViacepModel.fromJson(
+                                                jsonResponse,
+                                              );
+
+                                              address.value.text =
+                                                  '${viacep.logradouro}'
+                                                  ', Bairro ${viacep.bairro}'
+                                                  ', ${viacep.localidade}'
+                                                  ' - ${viacep.uf}.';
+                                            }
+                                            // else {
+                                            //   debugPrint(
+                                            //     'Request failed with status: ${response.statusCode}.',
+                                            //   );
+                                            // }
                                           }
                                         },
-                                        onSaved: (String? text) => controller
-                                            .client.dataNascimento = text,
+                                        onSaved: (String? text) =>
+                                            controller.client.cep = text,
                                       ),
                                       const SizedBox(height: 16),
-                                      TextFormFieldTemplate(
-                                        label: 'Endereço',
-                                        onSaved: (String? text) => controller
-                                            .client.dataNascimento = text,
+                                      ValueListenableBuilder<
+                                          TextEditingController>(
+                                        valueListenable: address,
+                                        builder: (
+                                          BuildContext context,
+                                          TextEditingController value,
+                                          Widget? child,
+                                        ) {
+                                          return TextFormFieldTemplate(
+                                            label: 'Endereço',
+                                            controller: value,
+                                            onSaved: (String? text) =>
+                                                controller.client.endereco =
+                                                    text,
+                                          );
+                                        },
                                       ),
                                       const SizedBox(height: 16),
                                       TextFormFieldTemplate(
                                         label: 'Nome do responsável',
+                                        validator: (String? value) {
+                                          if (isMinor &&
+                                              (value == null ||
+                                                  value.isEmpty)) {
+                                            return 'Digite o nome';
+                                          }
+                                          return null;
+                                        },
                                         onSaved: (String? text) => controller
-                                            .client.dataNascimento = text,
+                                            .client.nomeResponsavel = text,
                                       ),
                                       const SizedBox(height: 16),
                                       TextFormFieldTemplate(
                                         label: 'CPF do responsável',
+                                        validator: (String? value) {
+                                          if (isMinor &&
+                                              (value == null ||
+                                                  value.isEmpty)) {
+                                            return 'Digite o CPF';
+                                          }
+                                          if (isMinor &&
+                                              !CPFValidator.isValid(value)) {
+                                            return 'CPF inválido';
+                                          }
+
+                                          return null;
+                                        },
                                         onSaved: (String? text) => controller
-                                            .client.dataNascimento = text,
+                                            .client.cpfResponsavel = text,
                                         inputFormatters: [
                                           FilteringTextInputFormatter
                                               .digitsOnly,
