@@ -116,9 +116,20 @@ class _ClientFormState extends State<ClientForm> {
                                       TextFormFieldTemplate(
                                         label: 'Data de nascimento',
                                         validator: (String? value) {
-                                          if (value == null || value.isEmpty) {
+                                          if (value?.length != 10) {
                                             return 'Digite a data de nascimento';
                                           }
+                                          final int year = int.parse(
+                                              value!.substring(6, 10));
+
+                                          if (year < 1901) {
+                                            return 'Data inválida';
+                                          }
+
+                                          if (year > DateTime.now().year - 1) {
+                                            return 'Data inválida';
+                                          }
+
                                           return null;
                                         },
                                         inputFormatters: [

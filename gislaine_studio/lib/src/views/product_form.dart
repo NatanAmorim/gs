@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gislaine_studio/src/controllers/product_form_controller.dart';
 import 'package:gislaine_studio/src/utils/formatters/brl_input_formatter.dart';
+import 'package:gislaine_studio/src/utils/values_converter.dart';
 import 'package:gislaine_studio/src/views/templates/widgets/elevated_button_template.dart';
 import 'package:gislaine_studio/src/views/templates/widgets/textformfield_template.dart';
 
@@ -65,6 +66,7 @@ class _ProductFormState extends State<ProductForm> {
                                 const Divider(),
                                 const SizedBox(height: 15),
                                 Form(
+                                  key: controller.formKey,
                                   autovalidateMode:
                                       AutovalidateMode.onUserInteraction,
                                   child: Column(
@@ -86,6 +88,20 @@ class _ProductFormState extends State<ProductForm> {
                                             flex: 1,
                                             child: TextFormFieldTemplate(
                                               label: 'Preço',
+                                              validator: (String? value) {
+                                                if (value == null ||
+                                                    value.isEmpty) {
+                                                  return 'Digite o preço';
+                                                }
+
+                                                if (ValuesConverter.convertBrl(
+                                                        value) <
+                                                    0.05) {
+                                                  return 'Preço minimo de 5 centavos';
+                                                }
+
+                                                return null;
+                                              },
                                               inputFormatters: [
                                                 FilteringTextInputFormatter
                                                     .digitsOnly,
@@ -98,7 +114,20 @@ class _ProductFormState extends State<ProductForm> {
                                             flex: 1,
                                             child: TextFormFieldTemplate(
                                               label: 'Estoque minimo',
+                                              validator: (String? value) {
+                                                if (value == null ||
+                                                    value.isEmpty) {
+                                                  return 'Digite o estoque minimo';
+                                                }
+
+                                                if (int.parse(value) < 0) {
+                                                  return 'Estoque minimo inválido';
+                                                }
+                                                return null;
+                                              },
                                               inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .deny(RegExp('^0+(?=.)')),
                                                 FilteringTextInputFormatter
                                                     .digitsOnly,
                                               ],
