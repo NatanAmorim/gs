@@ -83,6 +83,8 @@ class _ProductFormState extends State<ProductForm> {
                                       ),
                                       const SizedBox(height: 16),
                                       Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Flexible(
                                             flex: 1,
@@ -97,7 +99,7 @@ class _ProductFormState extends State<ProductForm> {
                                                 if (ValuesConverter.convertBrl(
                                                         value) <
                                                     0.05) {
-                                                  return 'Preço minimo de 5 centavos';
+                                                  return 'Preço mínimo de 5 centavos';
                                                 }
 
                                                 return null;
@@ -113,15 +115,18 @@ class _ProductFormState extends State<ProductForm> {
                                           Flexible(
                                             flex: 1,
                                             child: TextFormFieldTemplate(
-                                              label: 'Estoque minimo',
+                                              label:
+                                                  'Quantidade de estoque mínimo',
+                                              helperText:
+                                                  'Para alertar, quando fica abaixo do mínimo',
                                               validator: (String? value) {
                                                 if (value == null ||
                                                     value.isEmpty) {
-                                                  return 'Digite o estoque minimo';
+                                                  return 'Digite a quantidade';
                                                 }
 
                                                 if (int.parse(value) < 0) {
-                                                  return 'Estoque minimo inválido';
+                                                  return 'quantidade inválida';
                                                 }
                                                 return null;
                                               },
