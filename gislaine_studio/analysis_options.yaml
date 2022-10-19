@@ -72,7 +72,7 @@ linter:
     prefer_final_in_for_each: true # Prefer final in for-each loop variable if reference is not reassigned.
     prefer_final_locals: true # Prefer final for variable declarations if they are not reassigned.
     prefer_if_null_operators: true # Prefer using if null operators.
-    prefer_interpolation_to_compose_strings: true # Use interpolation to compose strings and values.
+    prefer_interpolation_to_compose_strings: false # Use interpolation to compose strings and values.
     prefer_is_empty: true # Use isEmpty for Iterables and Maps.
     prefer_is_not_empty: true # Use isNotEmpty for Iterables and Maps.
     prefer_iterable_whereType: true # Prefer to use whereType on iterable.

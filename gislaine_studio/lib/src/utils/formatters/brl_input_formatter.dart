@@ -30,13 +30,13 @@ class BrlInputFormatter extends TextInputFormatter {
       return oldValue;
     }
 
-    const simbolo = 'R\$ ';
+    const simbolo = r'R$ ';
     final newText = StringBuffer();
     var centsValue = "";
     var valorFinal = newValue.text;
     var numero = int.parse(newValue.text);
 
-    var textValue = newValue.text.padLeft(
+    final textValue = newValue.text.padLeft(
         newValue.text.length == 1 ? casasDecimais + 1 : casasDecimais, "");
     if (textValue.length >= casasDecimais) {
       centsValue = textValue.substring(

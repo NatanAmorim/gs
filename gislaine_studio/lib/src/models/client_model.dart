@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-ClientModel ClientModelFromJson(String str) =>
+ClientModel clientModelFromJson(String str) =>
     ClientModel.fromJson(json.decode(str));
 
-String ClientModelToJson(ClientModel data) => json.encode(data.toJson());
+String clientModelToJson(ClientModel data) => json.encode(data.toJson());
 
 class ClientModel {
   ClientModel({

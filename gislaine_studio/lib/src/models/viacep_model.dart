@@ -24,18 +24,6 @@ class ViacepModel {
     this.siafi,
   });
 
-  String? erro;
-  String? cep;
-  String? logradouro;
-  String? complemento;
-  String? bairro;
-  String? localidade;
-  String? uf;
-  String? ibge;
-  String? gia;
-  String? ddd;
-  String? siafi;
-
   factory ViacepModel.fromJson(Map<String, dynamic> json) => ViacepModel(
         erro: json["erro"],
         cep: json["cep"],
@@ -49,6 +37,18 @@ class ViacepModel {
         ddd: json["ddd"],
         siafi: json["siafi"],
       );
+
+  String? erro;
+  String? cep;
+  String? logradouro;
+  String? complemento;
+  String? bairro;
+  String? localidade;
+  String? uf;
+  String? ibge;
+  String? gia;
+  String? ddd;
+  String? siafi;
 
   Map<String, dynamic> toJson() => {
         "erro": erro,

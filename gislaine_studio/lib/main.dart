@@ -2,14 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:gislaine_studio/src/database.dart';
+import 'package:gislaine_studio/src/views/client_form.dart';
 import 'package:gislaine_studio/src/views/inventory_screen.dart';
 import 'package:gislaine_studio/src/views/modality_form.dart';
 import 'package:gislaine_studio/src/views/order_form.dart';
 import 'package:gislaine_studio/src/views/point_of_sale_screen.dart';
 import 'package:gislaine_studio/src/views/product_form.dart';
 import 'package:gislaine_studio/src/views/records_screen.dart';
-import 'package:gislaine_studio/src/views/client_form.dart';
 import 'package:gislaine_studio/src/views/templates/app_theme.dart';
 import 'package:gislaine_studio/src/views/transactions_screen.dart';
 import 'package:path/path.dart' as path_helper;

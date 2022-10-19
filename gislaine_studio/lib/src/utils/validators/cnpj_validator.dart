@@ -24,30 +24,30 @@ class CNPJValidator {
   static int _verifierDigit(String cnpj) {
     var index = 2;
 
-    var reverse =
+    final reverse =
         cnpj.split('').map((s) => int.parse(s)).toList().reversed.toList();
 
     var sum = 0;
 
-    for (var number in reverse) {
+    for (final number in reverse) {
       sum += number * index;
-      index = (index == 9 ? 2 : index + 1);
+      index = index == 9 ? 2 : index + 1;
     }
 
-    var mod = sum % 11;
+    final mod = sum % 11;
 
-    return (mod < 2 ? 0 : 11 - mod);
+    return mod < 2 ? 0 : 11 - mod;
   }
 
   static String format(String cnpj) {
-    var regExp = RegExp(r'^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$');
+    final regExp = RegExp(r'^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$');
 
     return strip(cnpj).replaceAllMapped(
         regExp, (Match m) => '${m[1]}.${m[2]}.${m[3]}/${m[4]}-${m[5]}');
   }
 
   static String strip(String? cnpj) {
-    var regex = RegExp(stipRegex);
+    final regex = RegExp(stipRegex);
     cnpj = cnpj ?? '';
 
     return cnpj.replaceAll(regex, '');
@@ -91,6 +91,6 @@ class CNPJValidator {
     numbers += _verifierDigit(numbers).toString();
     numbers += _verifierDigit(numbers).toString();
 
-    return (useFormat ? format(numbers) : numbers);
+    return useFormat ? format(numbers) : numbers;
   }
 }
